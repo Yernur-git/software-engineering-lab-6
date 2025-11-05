@@ -1,11 +1,9 @@
-package org.example.softwareengineeringlab6;
+package org.example.softwareengineeringlab6.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.softwareengineeringlab6.entity.Courses;
-import org.example.softwareengineeringlab6.entity.Operators;
 
 import java.util.List;
 

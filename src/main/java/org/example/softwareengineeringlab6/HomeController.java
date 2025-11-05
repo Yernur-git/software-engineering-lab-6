@@ -1,5 +1,6 @@
 package org.example.softwareengineeringlab6;
 
+import org.example.softwareengineeringlab6.entity.ApplicationRequest;
 import org.example.softwareengineeringlab6.entity.Operators;
 import org.example.softwareengineeringlab6.repository.ApplicationRequestRepository;
 import org.example.softwareengineeringlab6.repository.CoursesRepository;
@@ -43,7 +44,7 @@ public class HomeController {
 
     @GetMapping("/new-requests")
     public String pendingRequests(Model model) {
-        List<ApplicationRequest> pendingRequests = requestRepository.findAllByHandled(false);
+        List<ApplicationRequest> pendingRequests = requestRepository.findByHandledFalseOrderByIdDesc();
         model.addAttribute("requests", pendingRequests);
         model.addAttribute("status", "New");
         return "filtered-list";
@@ -51,7 +52,7 @@ public class HomeController {
 
     @GetMapping("/processed-requests")
     public String processedRequests(Model model) {
-        List<ApplicationRequest> processedRequests = requestRepository.findAllByHandled(true);
+        List<ApplicationRequest> processedRequests = requestRepository.findByHandledTrueOrderByIdDesc();
         model.addAttribute("requests", processedRequests);
         model.addAttribute("status", "Processed");
         return "filtered-list";
