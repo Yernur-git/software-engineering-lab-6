@@ -57,7 +57,11 @@ public class ApplicationRequestRestController {
 
     @PostMapping("/{requestId}/assign/{operatorId}")
     public ResponseEntity<ApplicationRequest> assignOperator(@PathVariable Long requestId, @PathVariable Long operatorId) {
-        ApplicationRequest updated = requestService.assignOperator(requestId, operatorId);
-        return updated != null ? ResponseEntity.ok(updated) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        requestService.assignOperator(requestId, operatorId);
+        ApplicationRequest updatedRequest = requestService.getRequestById(requestId);
+        if (updatedRequest == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(updatedRequest, HttpStatus.OK);
     }
 }
