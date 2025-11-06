@@ -34,9 +34,15 @@ public class ApplicationRequestRestController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApplicationRequest> updateRequest(@PathVariable Long id, @RequestBody ApplicationRequest details) {
-        ApplicationRequest updated = requestService.updateRequest(id, details);
-        return updated != null ? ResponseEntity.ok(updated) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<ApplicationRequest> updateRequest(@PathVariable Long id, @RequestBody ApplicationRequest requestDetails) {
+        ApplicationRequest existingRequest = requestService.getRequestById(id);
+        if (existingRequest == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        existingRequest.setHandled(requestDetails.isHandled());
+
+        ApplicationRequest updatedRequest = requestService.addRequest(existingRequest);
+        return new ResponseEntity<>(updatedRequest, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

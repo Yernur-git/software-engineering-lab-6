@@ -16,10 +16,18 @@ public class ApplicationRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "username", nullable = false)
     private String userName;
+
+    @Column(name = "commentary", nullable = false)
     private String commentary;
+
+    @Column(name = "phone", nullable = false)
     private String phone;
-    private boolean handled;
+
+    @Column(nullable = false)
+    private boolean handled = false;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
@@ -32,13 +40,4 @@ public class ApplicationRequest {
             inverseJoinColumns = @JoinColumn(name = "operator_id")
     )
     private List<Operators> operators;
-
-    public ApplicationRequest(String userName, Courses course, String commentary, String phone) {
-        this.userName = userName;
-        this.course = course;
-        this.commentary = commentary;
-        this.phone = phone;
-        this.handled = false;
-
-    }
 }

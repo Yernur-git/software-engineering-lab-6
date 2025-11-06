@@ -1,5 +1,6 @@
 package org.example.softwareengineeringlab6.service;
 
+import org.example.softwareengineeringlab6.entity.ApplicationRequest;
 import org.example.softwareengineeringlab6.entity.Operators;
 import org.example.softwareengineeringlab6.repository.OperatorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,11 @@ public class OperatorsService {
     public List<Operators> getAllOperators() {
         return operatorsRepository.findAll();
     }
+
+    public Operators getOperatorsById(Long id) {
+        return operatorsRepository.findById(id).orElse(null);
+    }
+
 
     public Operators addOperator(Operators operator) {
         return operatorsRepository.save(operator);

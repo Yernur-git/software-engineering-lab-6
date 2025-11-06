@@ -25,4 +25,21 @@ public class OperatorsRestController {
     public ResponseEntity<Operators> addOperator(@RequestBody Operators operator) {
         return new ResponseEntity<>(operatorsService.addOperator(operator), HttpStatus.CREATED);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Operators> updateOperator(@PathVariable Long id,@RequestBody Operators operator) {
+        Operators idOperators = operatorsService.getOperatorsById(id);
+        if (idOperators == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        idOperators.setName(operator.getName());
+        idOperators.setSurname(operator.getSurname());
+
+        Operators updatedOperators = operatorsService.addOperator(idOperators);
+        return new ResponseEntity<>(updatedOperators, HttpStatus.OK);
+
+
+
+    }
 }
+
