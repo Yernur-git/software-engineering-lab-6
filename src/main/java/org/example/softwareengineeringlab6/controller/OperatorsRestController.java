@@ -37,9 +37,6 @@ public class OperatorsRestController {
 
         Operators updatedOperators = operatorsService.addOperator(idOperators);
         return new ResponseEntity<>(updatedOperators, HttpStatus.OK);
-
-
-
     }
 }
 

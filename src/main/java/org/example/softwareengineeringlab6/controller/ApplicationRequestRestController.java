@@ -24,7 +24,11 @@ public class ApplicationRequestRestController {
     @GetMapping("/{id}")
     public ResponseEntity<ApplicationRequest> getRequestById(@PathVariable Long id) {
         ApplicationRequest req = requestService.getRequestById(id);
-        return req != null ? ResponseEntity.ok(req) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (req == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return ResponseEntity.ok(requestService.getRequestById(id));
     }
 
     @PostMapping
