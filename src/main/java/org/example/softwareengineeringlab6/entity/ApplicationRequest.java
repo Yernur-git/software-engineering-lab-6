@@ -17,7 +17,7 @@ public class ApplicationRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "user_name", nullable = false)
     private String userName;
 
     @Column(name = "commentary", nullable = false)
